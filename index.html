@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>残村物瑞</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            color: #2c3e50;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 10%;
+            width: 80%;
+            height: 2px;
+            background: #7f8c8d;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-top: 25px;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        /* 边栏样式 */
+        .sidebar {
+            display: flex;
+            background: #e0e0e0;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-height: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sidebar:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .sidebar-left {
+            flex: 0 0 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.05);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar-right {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .sidebar-title {
+            font-size: 2rem;
+            font-weight: 300;
+            color: #2c3e50;
+            text-align: center;
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-title::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 30%;
+            width: 40%;
+            height: 1px;
+            background: #7f8c8d;
+        }
+        
+        .content-placeholder {
+            color: #7f8c8d;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .placeholder-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            opacity: 0.6;
+            color: #2c3e50;
+        }
+        
+        .placeholder-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 100%;
+        }
+        
+        .counter-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 10px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .counter-text {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+        
+        /* 访问统计专用样式 - 竖向排列 */
+        .vertical-counter {
+            flex-direction: column;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .vertical-counter .counter-number {
+            font-size: 3rem;
+            margin: 15px 0;
+        }
+        
+        .vertical-counter .counter-text {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .counter-title {
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .counter-title::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 25%;
+            width: 50%;
+            height: 2px;
+            background: #7f8c8d;
+        }
+        
+        .sidebar::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #95a5a6;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            border-top: 1px solid #d0d0d0;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 900px) {
+            .sidebar {
+                flex-direction: column;
+            }
+            
+            .sidebar-left {
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .sidebar-title, .counter-title {
+                font-size: 1.8rem;
+            }
+            
+            .counter-number {
+                font-size: 2rem;
+            }
+            
+            .vertical-counter .counter-number {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 4px;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .counter-number {
+                font-size: 1.8rem;
+            }
+            
+            .vertical-counter .counter-number {
+                font-size: 2.2rem;
+            }
+            
+            .counter-title {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>残村物瑞</h1>
+            <p class="subtitle">目前只在三床开放 后续可能会在其它地方做资源等</p>
+        </header>
+        
+        <div class="main-content">
+            <!-- 第一个边栏 -->
+            <div class="sidebar">
+                <div class="sidebar-left">
+                    <i class="fas fa-book-open placeholder-icon"></i>
+                    <h2 class="sidebar-title">残村物瑞</h2>
+                </div>
+                <div class="sidebar-right">
+                    <div class="content-placeholder">
+                        <p class="placeholder-text">主起床 尚未完成</p>
+                        <p class="placeholder-text">我们我群号是 921797772</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第二个边栏 -->
+            <div class="sidebar">
+                <div class="sidebar-left">
+                    <i class="fas fa-leaf placeholder-icon"></i>
+                    <h2 class="sidebar-title">DreamVine(梦之藤)</h2>
+                </div>
+                <div class="sidebar-right">
+                    <div class="content-placeholder">
+                        <p class="placeholder-text">合作起床</p>
+                        <p class="placeholder-text">我们的群号是 757328172</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第三个边栏 -->
+            <div class="sidebar">
+                <div class="sidebar-left">
+                    <i class="fas fa-hands placeholder-icon"></i>
+                    <h2 class="sidebar-title">等待合作商</h2>
+                </div>
+                <div class="sidebar-right">
+                    <div class="content-placeholder">
+                        <p class="placeholder-text">期待与您合作</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 修改后的第四个边栏 - 竖向排列的访问统计 -->
+            <div class="sidebar vertical-counter">
+                <h2 class="counter-title"></h2>
+                <div class="counter-number" id="visitCount">0</div>
+                <p class="counter-text">本网站累计访问次数</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>残村物瑞 · 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        // 访问计数器功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 检查是否支持localStorage
+            if (typeof(Storage) !== "undefined") {
+                // 获取当前访问次数或初始化为0
+                let visitCount = localStorage.getItem('visitCount') || 0;
+                
+                // 增加访问次数
+                visitCount++;
+                
+                // 存储更新后的值
+                localStorage.setItem('visitCount', visitCount);
+                
+                // 更新页面显示
+                document.getElementById('visitCount').textContent = visitCount;
+            } else {
+                // 如果不支持localStorage，显示错误信息
+                document.getElementById('visitCount').textContent = "不支持";
+                document.querySelector('.counter-text').textContent = "Eorror*0";
+            }
+        });
+    </script>
+</body>
+</html>
