@@ -101,6 +101,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            gap: 15px;
         }
         
         .sidebar-title {
@@ -199,6 +200,24 @@
             height: 4px;
             background: #95a5a6;
         }
+
+        /* 官网按钮样式 */
+        .go-btn {
+            display: inline-block;
+            width: fit-content;
+            margin: 0 auto;
+            padding: 10px 26px;
+            background-color: #2c3e50;
+            color: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+        }
+        .go-btn:hover {
+            background-color: #34495e;
+            transform: scale(1.03);
+        }
         
         /* 页脚样式 */
         footer {
@@ -261,6 +280,9 @@
             .counter-title {
                 font-size: 1.6rem;
             }
+            .go-btn {
+                padding: 8px 20px;
+            }
         }
     </style>
 </head>
@@ -286,17 +308,19 @@
                 </div>
             </div>
             
-            <!-- 第二个边栏 -->
+            <!-- 第二个边栏 GodBowan（新增前往官网按钮） -->
             <div class="sidebar">
                 <div class="sidebar-left">
                     <i class="fas fa-leaf placeholder-icon"></i>
-                    <h2 class="sidebar-title">DreamVine(梦之藤)</h2>
+                    <h2 class="sidebar-title">GodBowan</h2>
                 </div>
                 <div class="sidebar-right">
                     <div class="content-placeholder">
-                        <p class="placeholder-text">合作起床(恐怖至极😱😱尽然上架网易我的世界资源中心了)</p>
+                        <p class="placeholder-text">合作起床</p>
                         <p class="placeholder-text">我们的群号是 757328172</p>
                     </div>
+                    <!-- 跳转按钮 -->
+                    <a href="/godbowan_index" class="go-btn">前往官网</a>
                 </div>
             </div>
             
