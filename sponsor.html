@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>赞助 GodBowan</title>
+<link rel="icon" type="image/png" href="../img/logo.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --bg: #f1f5f9;
+    --text: #1e293b;
+    --text-secondary: rgba(30,41,59,0.6);
+    --text-muted: #94a3b8;
+    --glass-bg: rgba(0,0,0,0.03);
+    --glass-border: rgba(0,0,0,0.1);
+    --glass-shadow:
+      0 4px 12px rgba(0,0,0,0.08),
+      inset 2px 2px 2px rgba(255,255,255,0.8),
+      inset -2px -2px 2px rgba(0,0,0,0.05);
+    --highlight-color: rgba(0,0,0,0.1);
+    --accent: #1e293b;
+    --wechat: #07c160;
+  }
+  body.dark {
+    --bg: #0a0a0a;
+    --text: #e0e7ff;
+    --text-secondary: rgba(224,231,255,0.6);
+    --text-muted: #6b7280;
+    --glass-bg: rgba(255,255,255,0.04);
+    --glass-border: rgba(255,255,255,0.18);
+    --glass-shadow:
+      0 4px 12px rgba(0,0,0,0.3),
+      inset 2px 2px 2px rgba(255,255,255,0.15),
+      inset -2px -2px 2px rgba(0,0,0,0.2);
+    --highlight-color: rgba(255,255,255,0.5);
+    --accent: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+  }
+
+  .mesh-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    animation: orbFloat 20s ease-in-out infinite;
+  }
+  .orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(7,193,96,0.2) 0%, transparent 70%); top: -10%; left: -10%; }
+  .orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(236,72,153,0.15) 0%, transparent 70%); top: 40%; right: -5%; animation-delay: -7s; }
+  .orb-3 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(59,130,246,0.2) 0%, transparent 70%); bottom: -10%; left: 30%; animation-delay: -14s; }
+  @keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(50px, -30px) scale(1.1); }
+    66% { transform: translate(-30px, 50px) scale(0.9); }
+  }
+  body.dark .orb-1 { background: radial-gradient(circle, rgba(7,193,96,0.3) 0%, transparent 70%); }
+
+  .back-link {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 24px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s;
+  }
+  .back-link:hover { color: var(--text); transform: translateX(-4px); }
+
+  .theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: var(--text);
+    padding: 8px 16px;
+    border-radius: 24px;
+    cursor: pointer;
+    font-size: 13px;
+    z-index: 100;
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .theme-toggle:hover { background: rgba(128,128,128,0.2); transform: scale(1.05); }
+
+  .sponsor-card {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 480px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(30px) url('#liquid-glass-filter');
+    -webkit-backdrop-filter: blur(30px) url('#liquid-glass-filter');
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 48px 40px;
+    box-shadow: var(--glass-shadow);
+    text-align: center;
+    animation: cardIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  @keyframes cardIn {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .sponsor-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 24px;
+    color: var(--wechat);
+  }
+
+  .sponsor-card h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+
+  .sponsor-card p {
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  .qr-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 24px;
+  }
+  .qr-wrap img {
+    width: 240px;
+    height: 240px;
+    border-radius: 16px;
+    border: 2px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    object-fit: cover;
+  }
+  .qr-badge {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--wechat);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 12px rgba(7,193,96,0.3);
+  }
+
+  .sponsor-note {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--glass-border);
+  }
+
+  .sponsor-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 24px;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  @media (max-width: 480px) {
+    .sponsor-card { padding: 36px 24px; }
+    .qr-wrap img { width: 200px; height: 200px; }
+  }
+</style>
+</head>
+<body>
+
+  <a href="./GodBowan_index.html" class="back-link">
+    <i class="fa-solid fa-arrow-left"></i>
+    返回首页
+  </a>
+
+  <button class="theme-toggle" onclick="toggleTheme()">
+    <i class="fa-solid fa-moon" id="themeIcon"></i>
+    <span>主题</span>
+  </button>
+
+  <div class="mesh-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="sponsor-card">
+    <div class="sponsor-icon">
+      <i class="fa-brands fa-weixin"></i>
+    </div>
+    <h1>支持 GodBowan</h1>
+    <p>GodBowan 是一个完全公益的免费地图。你的每一份支持，都将帮助我们持续更新、维护插件，为开发者提供一丝丝动力。</p>
+
+    <div class="qr-wrap">
+      <img src="https://raw.githubusercontent.com/Bilixiabanxian/cancun/main/sponsor.jpg" alt="微信赞赏码">
+      <div class="qr-badge">
+        <i class="fa-brands fa-weixin"></i>
+        微信赞赏码
+      </div>
+    </div>
+
+    <div class="sponsor-stats">
+      <div class="stat">
+        <div class="stat-value">100%</div>
+        <div class="stat-label">地图公益、公开</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">0</div>
+        <div class="stat-label">广告</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">∞</div>
+        <div class="stat-label">感谢</div>
+      </div>
+    </div>
+
+    <div class="sponsor-note">
+      目前仅支持微信赞赏码赞助 · 扫码即可支持我们
+    </div>
+  </div>
+
+  <svg style="position:absolute;width:0;height:0">
+    <defs>
+      <filter id="liquid-glass-filter" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1" result="noise"/>
+        <feGaussianBlur in="noise" stdDeviation="2" result="blurredNoise"/>
+        <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="60" xChannelSelector="R" yChannelSelector="B" result="displaced"/>
+        <feGaussianBlur in="displaced" stdDeviation="3" result="blurred"/>
+        <feComposite in="blurred" in2="blurred" operator="over"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <script>
+    function setCookie(name, value, days) {
+      let expires = "";
+      if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/; SameSite=Lax";
+    }
+    function getCookie(name) {
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim();
+        if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length));
+      }
+      return null;
+    }
+
+    function applyTheme(dark) {
+      if (dark) {
+        document.body.classList.add('dark');
+        document.getElementById('themeIcon').classList.remove('fa-moon');
+        document.getElementById('themeIcon').classList.add('fa-sun');
+      } else {
+        document.body.classList.remove('dark');
+        document.getElementById('themeIcon').classList.remove('fa-sun');
+        document.getElementById('themeIcon').classList.add('fa-moon');
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.body.classList.contains('dark');
+      const newDark = !isDark;
+      applyTheme(newDark);
+      setCookie('GodBowan_theme', newDark ? 'dark' : 'light', 365);
+    }
+
+    (function initTheme() {
+      const saved = getCookie('GodBowan_theme');
+      if (saved === 'dark') applyTheme(true);
+      else applyTheme(false);
+    })();
+  </script>
+</body>
+</html>
