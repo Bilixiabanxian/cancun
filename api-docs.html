@@ -1,0 +1,120 @@
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GodBowan | 起床战争 游玩文档</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root {
+--bg: #ffffff; --bg-secondary: #f8f9fa; --text: #1a1a1a; --text-secondary: #6b7280; --text-muted: #9ca3af;
+--border: #e5e7eb; --border-light: #f3f4f6; --accent: #2563eb; --accent-hover: #1d4ed8; --accent-bg: #eff6ff;
+--code-bg: #1e1e1e; --code-text: #d4d4d4; --success: #10b981; --warning: #f59e0b; --danger: #ef4444;
+--sidebar-width: 260px; --header-height: 60px;
+}
+body.dark {
+--bg: #0d1117; --bg-secondary: #161b22; --text: #e6edf3; --text-secondary: #8b949e; --text-muted: #6e7681;
+--border: #30363d; --border-light: #21262d; --accent: #58a6ff; --accent-hover: #79c0ff; --accent-bg: rgba(88,166,255,0.1);
+--code-bg: #0d1117; --code-text: #c9d1d9;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: 15px; line-height: 1.7; -webkit-font-smoothing: antialiased; transition: background 0.3s, color 0.3s; }
+body, p, li, td, th, div, span, a, h1, h2, h3, h4, h5, h6 { word-break: break-word; overflow-wrap: break-word; }
+.header { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: var(--bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; z-index: 200; transition: background 0.3s, border-color 0.3s; }
+.header-left { display: flex; align-items: center; gap: 12px; }
+.header-left span { font-size: 16px; font-weight: 600; color: var(--text); }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.theme-toggle { background: none; border: 1px solid var(--border); color: var(--text-secondary); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
+.theme-toggle:hover { border-color: var(--text-muted); color: var(--text); }
+.layout { display: flex; margin-top: var(--header-height); min-height: calc(100vh - var(--header-height)); }
+.sidebar { position: fixed; top: var(--header-height); left: 0; width: var(--sidebar-width); height: calc(100vh - var(--header-height)); background: var(--bg-secondary); border-right: 1px solid var(--border); overflow-y: auto; padding: 20px 0; z-index: 100; transition: background 0.3s, border-color 0.3s; }
+.sidebar-link { display: block; padding: 8px 20px 8px 28px; color: var(--text-secondary); text-decoration: none; font-size: 14px; border-left: 2px solid transparent; transition: all 0.15s; cursor: pointer; }
+.sidebar-link:hover { color: var(--text); background: var(--border-light); }
+.sidebar-link.active { color: var(--accent); border-left-color: var(--accent); background: var(--accent-bg); }
+.sidebar-link.sub { padding-left: 44px; font-size: 13px; }
+.main { margin-left: var(--sidebar-width); flex: 1; max-width: 900px; padding: 48px 64px; }
+h2 { font-size: 24px; font-weight: 600; margin: 48px 0 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+h3 { font-size: 18px; font-weight: 600; margin: 32px 0 16px; color: var(--text); }
+p { margin-bottom: 16px; color: var(--text-secondary); }
+.api-item { margin: 24px 0; padding: 20px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-secondary); transition: border-color 0.2s; }
+.api-item:hover { border-color: var(--accent); }
+.api-signature { font-family: "SF Mono", Monaco, "Cascadia Code", Consolas, monospace; font-size: 14px; color: var(--accent); margin-bottom: 12px; word-break: break-all; }
+.api-signature .return-type { color: var(--success); }
+.api-signature .param-type { color: var(--warning); }
+.api-desc { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+pre { background: var(--code-bg); color: var(--code-text); padding: 20px; border-radius: 8px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.6; font-family: "SF Mono", Monaco, "Cascadia Code", Consolas, monospace; white-space: pre-wrap; word-break: break-all; }
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; white-space: inherit; word-break: inherit; }
+.code-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: #2d2d2d; border-radius: 8px 8px 0 0; border-bottom: 1px solid #3d3d3d; margin-bottom: -8px; }
+.code-header span { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+.code-header + pre { border-radius: 0 0 8px 8px; margin-top: 0; }
+table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; table-layout: fixed; }
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); word-break: break-word; }
+th { font-weight: 600; color: var(--text); background: var(--bg-secondary); }
+td { color: var(--text-secondary); }
+@media (max-width: 768px) { .sidebar { display: none; } .main { margin-left: 0; padding: 24px; } }
+</style>
+</head>
+<body>
+<header class="header">
+<div class="header-left"><span>GodBowan | 起床战争 游玩文档</span></div>
+<div class="header-right">
+<button class="theme-toggle" onclick="toggleTheme()"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+</div>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<a class="sidebar-link" href="#0" onclick="scrollToSection(event, '0')">感谢游玩《网易我的世界》GodBowan起床战争地图</a>
+<a class="sidebar-link" href="#1" onclick="scrollToSection(event, '1')">1、如何游玩我们的地图？</a>
+<a class="sidebar-link sub" href="#sub-1783598322143" onclick="scrollToSection(event, 'sub-1783598322143')">1、使用 经典版网易我的世界启动器/4399电脑端启动器 游玩地图教程</a>
+<a class="sidebar-link sub" href="#sub-1783598337974" onclick="scrollToSection(event, 'sub-1783598337974')">2、使用 互通版网易我的世界启动器/移动端网易我的世界/4399移动端 游玩地图教程</a>
+<a class="sidebar-link" href="#2" onclick="scrollToSection(event, '2')">2、反作弊规则</a>
+<a class="sidebar-link sub" href="#sub-1783598521394" onclick="scrollToSection(event, 'sub-1783598521394')">1、关于游戏“客户端”/游戏“材质”</a>
+<a class="sidebar-link sub" href="#sub-1783599255885" onclick="scrollToSection(event, 'sub-1783599255885')">2、关于注入型工具</a>
+<a class="sidebar-link sub" href="#sub-1783599448425" onclick="scrollToSection(event, 'sub-1783599448425')">3、关于言语发言与游戏内建筑</a>
+<a class="sidebar-link sub" href="#sub-1783599313994" onclick="scrollToSection(event, 'sub-1783599313994')">4、其他</a>
+<a class="sidebar-link sub" href="#sub-1783599401551" onclick="scrollToSection(event, 'sub-1783599401551')">5、关于违反反作弊规则处罚</a>
+<a class="sidebar-link" href="#3" onclick="scrollToSection(event, '3')">3、我们使用的插件</a>
+
+</aside>
+<main class="main">
+<section id="0">
+<h2>感谢游玩《网易我的世界》GodBowan起床战争地图</h2>
+</section>
+<section id="1">
+<h2>1、如何游玩我们的地图？</h2>
+<h3 id="sub-1783598322143">1、使用 经典版网易我的世界启动器/4399电脑端启动器 游玩地图教程</h3>
+<p>若您还未获取GodBowan地图（点击资源中心 &gt; 搜索“GodBowan” &gt; 点击名字为“起床战争GodBowan”的地图 &gt; 点击联机专区）若您已获取该地图（点击开始游戏 &gt; 点击联机大厅 &gt; 点击起床战争GodBowan）即可创建房间或加入其他人的房间游玩</p>
+<h3 id="sub-1783598337974">2、使用 互通版网易我的世界启动器/移动端网易我的世界/4399移动端 游玩地图教程</h3>
+<p>（点击开始游戏 &gt; 点击联机大厅 &gt; 搜索“GodBowan” &gt; 点击起床战争GodBowan &gt; 点击购买/获取/联机专区/游玩）即可创建房间或加入其他人的房间游玩</p>
+</section>
+<section id="2">
+<h2>2、反作弊规则</h2>
+以下为GodBowan起床战争地图/服务器的反作弊规则，请勿违反该规则！改规则尚未成熟，可能有未覆盖的地方，若发现，可在官方群里@幻方者告知，非常感谢您的包容
+<h3 id="sub-1783598521394">1、关于游戏“客户端”/游戏“材质”</h3>
+我们禁止使用违反游戏公平性的客户端与材质，包括但不限于（透视、反隐身、外挂、穿墙esp等）<br><br>我们允许仅修改游戏内容贴图、音效的客户端与材质
+<h3 id="sub-1783599255885">2、关于注入型工具</h3>
+我们禁止一切注入型工具
+<h3 id="sub-1783599448425">3、关于言语发言与游戏内建筑</h3>
+我们禁止一切网络暴力、黄、赌、毒词语，禁止一切脏话（包括但不限于：傻*）<br>我们禁止一切不文明游戏建筑（包括但不限于：“火箭模型”、不文明字样）
+<h3 id="sub-1783599313994">4、其他</h3>
+我们禁止一切修改游戏数据、内存的物品、程序。
+<h3 id="sub-1783599401551">5、关于违反反作弊规则处罚</h3>
+若违反以上反作弊规则将会被处以不等天数的封禁
+</section>
+<section id="3">
+<h2>3、我们使用的插件</h2>
+我们使用的插件/模组均经过作者同意允许<br>未获取作者允许的插件我们永远不使用
+</section>
+
+</main>
+</div>
+<script>
+function setCookie(name, value, days) { let expires = ""; if (days) { const date = new Date(); date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); expires = "; expires=" + date.toUTCString(); } document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/; SameSite=Lax"; }
+function getCookie(name) { const nameEQ = name + "="; const ca = document.cookie.split(';'); for (let i = 0; i < ca.length; i++) { let c = ca[i].trim(); if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length)); } return null; }
+function applyTheme(dark) { if (dark) { document.body.classList.add('dark'); document.getElementById('themeIcon').classList.remove('fa-moon'); document.getElementById('themeIcon').classList.add('fa-sun'); } else { document.body.classList.remove('dark'); document.getElementById('themeIcon').classList.remove('fa-sun'); document.getElementById('themeIcon').classList.add('fa-moon'); } }
+function toggleTheme() { const isDark = document.body.classList.contains('dark'); const newDark = !isDark; applyTheme(newDark); setCookie('vector_theme', newDark ? 'dark' : 'light', 365); }
+(function initTheme() { const saved = getCookie('vector_theme'); if (saved === 'dark') { applyTheme(true); } else { applyTheme(false); } })();
+function scrollToSection(e, id) { e.preventDefault(); const el = document.getElementById(id); if (el) { const headerOffset = 80; const pos = el.getBoundingClientRect().top + window.scrollY - headerOffset; window.scrollTo({ top: pos, behavior: 'smooth' }); } document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active')); if(e.target) e.target.classList.add('active'); }
+const sections = document.querySelectorAll('section[id], h3[id]'); const sidebarLinks = document.querySelectorAll('.sidebar-link'); window.addEventListener('scroll', () => { let current = ''; sections.forEach(section => { const top = section.offsetTop - 100; if (window.scrollY >= top) current = section.id; }); sidebarLinks.forEach(link => { link.classList.remove('active'); if (link.getAttribute('href') === '#' + current) link.classList.add('active'); }); });
+</script>
+</body>
+</html>
